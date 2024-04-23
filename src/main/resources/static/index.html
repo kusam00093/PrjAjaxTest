@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+	a{
+		text-decoration: none;
+		color : black;
+	}
+	
+	a:hover{
+		background-color: yellow;
+		font-weight: bolder;
+	}
+
+	ul,li{
+		list-style: none;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<ul>
+			<li><a href="/mvc">MVC 방식</a></li>
+			<li><a href="/ajax1">AJAX01(view)</a></li>
+			<li><a href="/ajax2">AJAX02(data)</a></li>
+			<li>&nbsp;</li>
+			<li>
+			<input type="text"   id="indata">
+			<input type="button" id="check" value="중복확인(XHR)">			
+			</li>
+			<li>&nbsp;</li>
+			<li>
+			<input type="text"   id="indata2">
+			<input type="button" id="check2" value="중복확인(fetch)">			
+			
+			</li>
+			<li>&nbsp;</li>
+			<li>
+			<input type="text"   id="indata3">
+			<input type="button" id="check3" value="중복확인(fetch)">			
+			
+			</li>
+		</ul>	
+		<div id="output"></div>
+		
+		<ul>
+		<li><a href="/jquery01.html">jquery01</a></li>
+		<li><a href="/jquery02.html">jquery02</a></li>
+		<li><a href="/jquery03.html">jquery03</a></li>
+		<li><a href="/jquery04.html">jquery04</a></li>
+		<li><a href="/jquery05.html">jquery05</a></li>
+		<li><a href="/jquery06.html">jquery06</a></li>
+		<li><a href="/jquery07.html">jquery07</a></li>
+		<li><a href="/jquery08.html">jquery08</a></li>
+		</ul>
+	</div>
+	
+	<script>
+		const outputEl = document.getElementById('output');
+		// a tag 사용하지 않고 버튼클릭할때 서버data 를 가져온다
+		const indataEl = document.querySelector('#check');
+		indataEl.addEventListener('click',function(){
+		//alert('중복확인');
+		
+		// old 문법 : XMLHttpRequest
+		// response.ResponseText : response.text()
+		// response.ResponseXML  : response.xml()
+		// JSON : JSON.stringify("js객체") -> String 변경
+		// JSON : JSON.parse("문자열")           -> JS 객체 변경
+		
+		const xhttp = new XMLHttpRequest(); // 1. XHR new
+		xhttp.onload = function() {	  		
+		// 비동기 호출(Asynchronous  Javascript And Xml : AJAX)
+		// 4. 결과가 도착할때 수행
+			console.dir(xhttp);
+			//alert(xhttp.responseText);
+			outputEl.innerHTML = xhttp.responseText;
+		}
+
+		xhttp.open("GET", "ajax3");         // 2. 호출 준비
+		xhttp.send();                       // 3. 호출
+		
+		}) // addEventListener() 함수 끝
+		//========================================================================================
+		
+		const check2El = document.querySelector('#check2');
+		check2El.onclick = (e) => {
+			//alert('data2click');
+			let result ='';
+			fetch('/ajax3')
+			//.then ((response) => function(){response.text()})
+			.then ((response) => response.text())    // text/plain, text/html
+			.then ((data)     => {
+				result = data
+				outputEl.innerHTML = result;			
+			})
+		};
+		
+		//==========================================================================================
+		const check3El = document.querySelector('#check3');
+		check3El.onclick = (e) =>{
+
+		fetch('/ajax4')
+		.then ((response) => response.json())      // application/json
+		.then ((jsonObj)     => {
+			alert(jsonObj)                            //[object Object]
+			let html = `
+		    <div>
+			  <ul>
+			    <li>아이디  : ${jsonObj.userid}</li>
+			    <li>비밀번호: ${jsonObj.userpass}</li>
+			    <li>이름    : ${jsonObj.username}</li>
+			  </ul>
+			</div>`
+			outputEl.innerHTML = html;
+		});
+		
+		}
+	</script>
+	
+	
+	
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script>
+  $(function() {
+	$('div').on('click',function(e){
+		// 클릭한 div의 innerHTML
+		//console.dir(this);                // jquery css() 함수가 없다
+		console.dir($('div'));            // jquery css() 함수가 있다
+		//console.dir(e.target.innerHTML);
+		//console.dir(this.innerHTML);      // this == e.target 클릭한 div
+		// 클릭한 div의 배경색 변경
+		//e.target.style.color='red';
+		//this.style.color='red';         
+		//this.css('color','blue');		  // error : this.css is not a function
+		$(this).css('color','red');
+	})
+  })
+</script>
+</head>
+<body>
+	<div>div1</div>
+	<div>div2</div>
+	<div>div3</div>
+	<div>div4</div>
+</body>
+</html>
