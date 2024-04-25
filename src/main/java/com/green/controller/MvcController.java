@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MvcController {
 	@RequestMapping("/mvc")
 	public String mvc(Model model) {
+		model.addAttribute("username", "페이커");
 		return "/mvc";      //  src/main/resources/templates/mvc.mustache
 	}
 	
