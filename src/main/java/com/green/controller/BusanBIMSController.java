@@ -26,7 +26,7 @@ public class BusanBIMSController  {
 		
 		String serviceKey ="lF9z%2F84nRg1%2FjDz5McsPAVnUnVKBogjud3xT1g2EMjU1IvNBgFuvNw%2BsanlGOujT5P8HxVsULncWUVgkPLvKFg%3D%3D";
 		
-		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanBIMS/busStopList"); /*URL*/
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanBIMS/busStopList"); /*URL*/   
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") +"="+ serviceKey); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(dto.getPageNo(), "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode(dto.getNumOfRows(), "UTF-8")); /*한 페이지 결과 수*/
